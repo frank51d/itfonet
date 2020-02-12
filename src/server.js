@@ -6,6 +6,15 @@ const app = express();
 
 app.use(cors());
 
+app.use(function(req, res, next) {
+    req.header("Access-Control-Allow-Origin", "*");
+    req.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.use(express.static('./dist/fonetApp'));
 
 app.get('/',function(req,res){
@@ -14,4 +23,11 @@ app.get('/',function(req,res){
 
 app.listen(process.env.PORT || 8080);
 
-app.options('*', cors());
+app.use(function(req, res, next) {
+    req.header("Access-Control-Allow-Origin", "*");
+    req.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
